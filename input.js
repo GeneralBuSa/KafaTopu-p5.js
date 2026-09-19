@@ -1,15 +1,30 @@
 // input.js
 
 function keyPressed() {
+  // Karakter seçim ekranındaysa tuş kontrolleri
+  if (karakterSecimEkrani) {
+    // 1. Oyuncu karakter değiştirme (A veya D)
+    if (keyCode === 65 || keyCode === 68) {
+      secilenKarakter1 = (secilenKarakter1 === "messi") ? "ronaldo" : "messi";
+    }
+    // 2. Oyuncu karakter değiştirme (Sol veya Sağ Ok)
+    if (keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW) {
+      secilenKarakter2 = (secilenKarakter2 === "messi") ? "ronaldo" : "messi";
+    }
+    // Maçı Başlat (Boşluk veya Enter)
+    if (keyCode === 32 || keyCode === ENTER) {
+      karakterleriAyarlaVeBaslat();
+    }
+    return;
+  }
+
   // Oyun bekliyorken (geri sayım aktifken) oyuncuların hareketini engelle
   if (oyunBekliyor) return;
 
   // Oyun ilk defa başlıyorsa (talimatlar ekranından oyuna geçiş)
   if (!oyunBasladi) {
     oyunBasladi = true;
-    // İlk başlangıçta topuSifirla() veya geri sayım burada çağrılmıyor.
-    // main.js'deki draw() fonksiyonu ilk kurulumu yönetecek.
-    return; // İlk tuşa basışta sadece oyunu başlat ve geri dön
+    return;
   }
 
   // Oyun bittiğinde 'R' tuşu ile sıfırla
@@ -58,5 +73,24 @@ function keyReleased() {
   // Oyuncu 2
   if (keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW) {
     oyuncu2.hizX = 0;
+  }
+}
+
+function mousePressed() {
+  if (karakterSecimEkrani) {
+    // 1. Oyuncu kartına tıklama
+    if (mouseX >= 100 && mouseX <= 360 && mouseY >= 125 && mouseY <= 465) {
+      secilenKarakter1 = (secilenKarakter1 === "messi") ? "ronaldo" : "messi";
+    }
+
+    // 2. Oyuncu kartına tıklama
+    if (mouseX >= 440 && mouseX <= 700 && mouseY >= 125 && mouseY <= 465) {
+      secilenKarakter2 = (secilenKarakter2 === "messi") ? "ronaldo" : "messi";
+    }
+
+    // Maça Başla butonuna tıklama
+    if (mouseX >= 270 && mouseX <= 530 && mouseY >= 495 && mouseY <= 550) {
+      karakterleriAyarlaVeBaslat();
+    }
   }
 }

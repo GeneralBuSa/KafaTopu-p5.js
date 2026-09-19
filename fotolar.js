@@ -1,12 +1,21 @@
-function preload() {
-  // Resim yüklemede hata yakalama
-  try {
-    kafaResmi1 = loadImage("1.png")
-    kafaResmi2 = loadImage("3.png")
-    kramponResmi1 = loadImage("2.png")
-    kramponResmi2 = loadImage("4.png")
-  } catch (error) {
-    console.log("Resimler yüklenemedi, varsayılan şekiller kullanılacak")
-  }
+function resimYukle(yol) {
+  return loadImage(
+    encodeURI(yol),
+    () => {},
+    (err) => {
+      console.warn("Görsel yüklenemedi (" + yol + "). Bir yerel sunucu (Live Server) ile çalıştırmayı deneyin.");
+    }
+  );
+}
 
+function preload() {
+  kafaResmi1 = resimYukle("1.png");
+  kafaResmi2 = resimYukle("3.png");
+  kramponResmi1 = resimYukle("krampon-sol.png");
+  kramponResmi2 = resimYukle("krampon-sağ.png");
+  messiSag = resimYukle("Messi-sağ.png");
+  messiSol = resimYukle("Messi-sol.png");
+  ronaldoSag = resimYukle("Ronaldo-sağ.png");
+  ronaldoSol = resimYukle("Ronaldo-sol.png");
+  topResmi = resimYukle("top.png");
 }

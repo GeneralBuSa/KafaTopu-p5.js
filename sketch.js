@@ -3,8 +3,9 @@ function setup() {
   createCanvas(800, 600);
 
   // Seyirci renklerini oluştur
+  seyirciRenk = (typeof seyirciRenk !== 'undefined' && seyirciRenk) ? seyirciRenk : [];
   for (let i = 0; i < 50; i++) { // 50 renk oluştur
-    seyirciRenk.push(color(random(255), random(255), random(255))); 
+    seyirciRenk.push(color(random(255), random(255), random(255)));
   }
 
   // Top
@@ -22,10 +23,10 @@ function setup() {
   // Oyuncu 1
   oyuncu1 = {
     x: 150,
-    y: zemin - 35 - 25, 
+    y: zemin - 41,
     kafaYaricap: 35,
-    kramponGenislik: 70,
-    kramponYukseklik: 25,
+    kramponGenislik: 68,
+    kramponYukseklik: 34,
     hizX: 0,
     hizY: 0,
     hiz: 5,
@@ -41,10 +42,10 @@ function setup() {
   // Oyuncu 2
   oyuncu2 = {
     x: 650,
-    y: zemin - 35 - 25, 
+    y: zemin - 41,
     kafaYaricap: 35,
-    kramponGenislik: 70,
-    kramponYukseklik: 25,
+    kramponGenislik: 68,
+    kramponYukseklik: 34,
     hizX: 0,
     hizY: 0,
     hiz: 5,
@@ -62,12 +63,18 @@ function setup() {
   kale2 = { x: width, y: 375, genislik: 50, yukseklik: 180, direkKalinlik: 10 }
 
   sonZamanKontrol = millis()
-  
-  // Oyun ilk başladığında topu ve oyuncuları sıfırla, geri sayımı başlat
-  topuSifirla(); 
+
+  // Başlangıçta oyuncuları konumlandır
+  topuVeOyunculariIlkKonumlandir();
 }
 
 function draw() {
+  // Karakter seçim ekranı aktifse sadece onu çiz
+  if (karakterSecimEkrani) {
+    karakterSeciminiCiz();
+    return;
+  }
+
   background(135, 206, 235)
 
   // Tribünleri çiz
@@ -86,14 +93,14 @@ function draw() {
     sonucEkraniGoster()
     return
   }
-    if (!oyunIlkKurulduMu) {
-        topuVeOyunculariIlkKonumlandir(); // Topu ve oyuncuları başlangıç konumuna yerleştir 
-        oyunIlkKurulduMu = true;
-        sonZamanKontrol = millis(); // Süre hemen akmaya başlasın
-        oyunBekliyor = false; // Oyun başlar başlamaz beklemede olmamalı
-        geriSayimAktif = false; // İlk başlangıçta geri sayım aktif olmamalı
-        geriSayimMetni = "";
-    }
+  if (!oyunIlkKurulduMu) {
+    topuVeOyunculariIlkKonumlandir(); // Topu ve oyuncuları başlangıç konumuna yerleştir 
+    oyunIlkKurulduMu = true;
+    sonZamanKontrol = millis(); // Süre hemen akmaya başlasın
+    oyunBekliyor = false; // Oyun başlar başlamaz beklemede olmamalı
+    geriSayimAktif = false; // İlk başlangıçta geri sayım aktif olmamalı
+    geriSayimMetni = "";
+  }
 
   // Saha tasarımı
   kaleleriCiz()
@@ -107,14 +114,14 @@ function draw() {
     golleriKontrolEt()
     sutAnimasyonlariniGuncelle()
   }
-    
-//oyuncu çizimleri
+
+  //oyuncu çizimleri
   oyuncuyuCiz(oyuncu1, kafaResmi1, true)
   oyuncuyuCiz(oyuncu2, kafaResmi2, false)
   topuCiz()
-//skor bilgisini gösterme
+  //skor bilgisini gösterme
   bilgileriGoster()
-//talimatların gösterilmesi için
+  //talimatların gösterilmesi için
   if (!oyunBasladi) {
     talimatlariGoster()
   }

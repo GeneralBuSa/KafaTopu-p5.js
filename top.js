@@ -40,9 +40,17 @@ function topuGuncelle() {
 }
 
 function topuCiz() {
-  fill(255)
-  stroke(0)
-  strokeWeight(2)
-  ellipse(futbolTop.x, futbolTop.y, futbolTop.yaricap * 2, futbolTop.yaricap * 2)
-  noStroke()
+  if (topResmi && topResmi.width > 1) {
+    push();
+    translate(futbolTop.x, futbolTop.y);
+    imageMode(CENTER);
+    image(topResmi, 0, 0, futbolTop.yaricap * 2, futbolTop.yaricap * 2);
+    pop();
+  } else {
+    fill(255);
+    stroke(0);
+    strokeWeight(2);
+    ellipse(futbolTop.x, futbolTop.y, futbolTop.yaricap * 2, futbolTop.yaricap * 2);
+    noStroke();
+  }
 }

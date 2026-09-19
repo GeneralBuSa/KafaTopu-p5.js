@@ -1,33 +1,40 @@
 // config.js
 
+// Seyirci Renkleri
+var seyirciRenk = [];
+var seyirciRenkleri = [];
+
 // Oyun Nesneleri
-let futbolTop, oyuncu1, oyuncu2, kale1, kale2;
+var futbolTop, oyuncu1, oyuncu2, kale1, kale2;
 
 // Resimler
-let kafaResmi1, kafaResmi2, kramponResmi1, kramponResmi2;
+var kafaResmi1, kafaResmi2, kramponResmi1, kramponResmi2;
+var messiSag, messiSol, ronaldoSag, ronaldoSol;
+var topResmi;
+
+// Karakter Seçim Değişkenleri
+var karakterSecimEkrani = true;
+var secilenKarakter1 = "messi"; // "messi" veya "ronaldo"
+var secilenKarakter2 = "ronaldo"; // "messi" veya "ronaldo"
 
 // Ayarlar ve Sabitler
-const seyirciRenkleri = [];
-const zemin = 550;
+var zemin = 550;
 
 // Oyun Durumu Değişkenleri
-let oyunBasladi = false;
-let oyunBitti = false;
-let kalanSure = 60;
-let sonZamanKontrol;
+var oyunBasladi = false;
+var oyunBitti = false;
+var kalanSure = 60;
+var sonZamanKontrol;
 
 // Gol Ekranı Değişkenleri
-let golEkrani = false;
-let golEkraniSayaci = 0;
-let golAtan = 0; // 1 veya 2
+var golEkrani = false;
+var golEkraniSayaci = 0;
+var golAtan = 0; // 1 veya 2
 
 // Geri Sayım Değişkenleri
-let geriSayimAktif = false;
-let geriSayimSayaci = 0;
-let geriSayimMetni = "";
-let oyunBekliyor = false; // Oyunun geri sayım nedeniyle durakladığını belirtir
+var geriSayimAktif = false;
+var geriSayimSayaci = 0;
+var geriSayimMetni = "";
+var oyunBekliyor = false;
 
-// Seyirci Renkleri
-let seyirciRenk = [];
-
-let oyunIlkKurulduMu = false; // YENİ: Oyunun ilk kurulumunun yapılıp yapılmadığını kontrol eder
+var oyunIlkKurulduMu = false;
